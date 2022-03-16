@@ -10,14 +10,18 @@ import { CustomTextAria } from '../../Common/UI/CustomTextAria';
 const drawerWidth = 240;
 
 interface ISideBar {
-  setNumberOfFlightsVisible: React.Dispatch<React.SetStateAction<number>>;
   setTransfersStatus: React.Dispatch<React.SetStateAction<string>>;
   setToCost: React.Dispatch<React.SetStateAction<string>>;
   setFromCost: React.Dispatch<React.SetStateAction<string>>;
   setSortType: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const SideBar: React.FC<ISideBar> = () => {
+export const SideBar: React.FC<ISideBar> = ({
+  setTransfersStatus,
+  setToCost,
+  setFromCost,
+  setSortType,
+}) => {
   return (
     <Drawer
       sx={{
@@ -33,10 +37,9 @@ export const SideBar: React.FC<ISideBar> = () => {
     >
       <Toolbar />
       <Divider />
-
       <CustomRadio
         handleChange={(value) => {
-          console.log(value);
+          setSortType(value);
         }}
         options={[
           { value: 'upCost', label: 'По возрастанию цены' },
@@ -48,7 +51,7 @@ export const SideBar: React.FC<ISideBar> = () => {
       <Divider />
       <CustomRadio
         handleChange={(value) => {
-          console.log(value);
+          setTransfersStatus(value);
         }}
         options={[
           { value: 'withoutTransfers', label: 'Без пересадок' },
@@ -59,10 +62,10 @@ export const SideBar: React.FC<ISideBar> = () => {
       <Divider />
       <CustomTextAria
         fromInputHandler={(value) => {
-          console.log(value);
+          setFromCost(value);
         }}
         toInputHandler={(value) => {
-          console.log(value);
+          setToCost(value);
         }}
         defaultFromValue={'0'}
         defaultToValue={'100000'}

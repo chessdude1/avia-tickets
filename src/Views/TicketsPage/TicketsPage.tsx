@@ -2,6 +2,8 @@ import { Typography } from '@mui/material';
 import React from 'react';
 import { SideBar } from '../SideBar/Sidebar';
 import Box from '@mui/material/Box';
+import { IFlightGeneral } from './TicketsPageAux';
+import Ticket from './Ticket/Ticket';
 
 interface ITicketsPage {
   setNumberOfFlightsVisible: React.Dispatch<React.SetStateAction<number>>;
@@ -9,11 +11,8 @@ interface ITicketsPage {
   setToCost: React.Dispatch<React.SetStateAction<string>>;
   setFromCost: React.Dispatch<React.SetStateAction<string>>;
   setSortType: React.Dispatch<React.SetStateAction<string>>;
+  flightToView: Array<IFlightGeneral>;
   numberOfFlightsVisible: number;
-  transfersStatus: string;
-  sortType: string;
-  fromCost: string;
-  toCost: string;
 }
 
 export const TicketsPage: React.FC<ITicketsPage> = ({
@@ -22,22 +21,19 @@ export const TicketsPage: React.FC<ITicketsPage> = ({
   setToCost,
   setFromCost,
   setSortType,
-  numberOfFlightsVisible,
-  transfersStatus,
-  sortType,
-  fromCost,
-  toCost,
+  flightToView,
 }) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <SideBar
-        setNumberOfFlightsVisible={setNumberOfFlightsVisible}
         setTransfersStatus={setTransfersStatus}
         setToCost={setToCost}
         setFromCost={setFromCost}
         setSortType={setSortType}
       />
-      <Typography variant='h1'>123</Typography>
+      {flightToView.map((flight) => {
+        return <Ticket key={flight.flightToken} flight={flight.flight} />;
+      })}
     </Box>
   );
 };
