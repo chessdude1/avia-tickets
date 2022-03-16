@@ -1,9 +1,8 @@
 import * as React from 'react';
 
 import Drawer from '@mui/material/Drawer';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
 import { CustomRadio } from '../../Common/UI/CustomRadio';
 import { CustomTextAria } from '../../Common/UI/CustomTextAria';
 
@@ -35,43 +34,43 @@ export const SideBar: React.FC<ISideBar> = ({
       variant='permanent'
       anchor='left'
     >
-      <Toolbar />
-      <Divider />
-      <CustomRadio
-        handleChange={(value) => {
-          setSortType(value);
-        }}
-        options={[
-          { value: 'upCost', label: 'По возрастанию цены' },
-          { value: 'downCost', label: 'По убыванию цены' },
-          { value: 'timeInTravel', label: 'По времени в пути' },
-        ]}
-        head={'Сортировать'}
-      />
-      <Divider />
-      <CustomRadio
-        handleChange={(value) => {
-          setTransfersStatus(value);
-        }}
-        options={[
-          { value: 'withoutTransfers', label: 'Без пересадок' },
-          { value: 'withTransfer', label: 'С 1 пересадкой' },
-        ]}
-        head={'Фильтровать'}
-      />
-      <Divider />
-      <CustomTextAria
-        fromInputHandler={(value) => {
-          setFromCost(value);
-        }}
-        toInputHandler={(value) => {
-          setToCost(value);
-        }}
-        defaultFromValue={'0'}
-        defaultToValue={'100000'}
-        fromLabel={'От'}
-        toLabel={'До'}
-      />
+      <Box sx={{ marginTop: '20px', marginLeft: '20px' }}>
+        <CustomRadio
+          handleChange={(value) => {
+            setSortType(value);
+          }}
+          options={[
+            { value: 'upCost', label: 'По возрастанию цены' },
+            { value: 'downCost', label: 'По убыванию цены' },
+            { value: 'timeInTravel', label: 'По времени в пути' },
+          ]}
+          head={'Сортировать'}
+        />
+        <Divider />
+        <CustomRadio
+          handleChange={(value) => {
+            setTransfersStatus(value);
+          }}
+          options={[
+            { value: 'withoutTransfers', label: 'Без пересадок' },
+            { value: 'withTransfer', label: 'С 1 пересадкой' },
+          ]}
+          head={'Фильтровать'}
+        />
+        <Divider />
+        <CustomTextAria
+          fromInputHandler={(value) => {
+            setFromCost(value);
+          }}
+          toInputHandler={(value) => {
+            setToCost(value);
+          }}
+          defaultFromValue={'0'}
+          defaultToValue={'100000'}
+          fromLabel={'От'}
+          toLabel={'До'}
+        />
+      </Box>
     </Drawer>
   );
 };

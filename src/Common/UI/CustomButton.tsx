@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-
+import './CustomButtonStyles.css';
 interface ICustomButton {
   variant: 'contained' | 'outlined' | 'text';
   text: string;

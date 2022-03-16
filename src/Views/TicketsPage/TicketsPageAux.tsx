@@ -14,7 +14,7 @@ export interface IFlightGeneral {
 }
 
 export interface IFlight {
-  airlineAlliance: { uuid: string; caption: 'string' };
+  airlineAlliance: { uid: string; caption: 'string' };
   legs: Array<Leg>; // leg its array with 2 leg
   price: {
     total: { amount: string; currency: string; currencyCode: string };
@@ -24,13 +24,14 @@ export interface IFlight {
 export interface Leg {
   duration: number;
   segments: Array<{
-    arrivalAirport: { uuid: string; caption: string };
-    arrivalCity: { uuid: string; caption: string };
+    arrivalAirport: { uid: string; caption: string };
+    arrivalCity: { uid: string; caption: string };
     arrivalDate: 'string';
-    departureAirport: { uuid: string; caption: string };
-    departureCity: { uuid: string; caption: string };
+    departureAirport: { uid: string; caption: string };
+    departureCity: { uid: string; caption: string };
     departureDate: string;
     travelDuration: number;
+    airline: { uid: string; caption: string; airlineCode: string };
   }>;
 }
 
@@ -38,8 +39,6 @@ export const TicketsPageAux = () => {
   const [allFlights, setAllFlights] = useState<IFlights>(
     JSON.parse(JSON.stringify(flights))
   );
-
-  console.log(allFlights);
 
   const [numberOfFlightsVisible, setNumberOfFlightsVisible] =
     useState<number>(2);
@@ -57,7 +56,6 @@ export const TicketsPageAux = () => {
       numberOfFlightsVisible
     );
 
-    console.log(flightsToView);
     if (transfersStatus !== '') {
       // if transfer status setted
       if (transfersStatus === 'withTransfer') {
@@ -97,8 +95,8 @@ export const TicketsPageAux = () => {
       if (sortType === 'downCost') {
         flightsToView.sort((a, b) => {
           return (
-            Number(a.flight.price.total.amount) -
-            Number(b.flight.price.total.amount)
+            Number(b.flight.price.total.amount) -
+            Number(a.flight.price.total.amount)
           );
         });
       }
